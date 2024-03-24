@@ -1,10 +1,14 @@
+import PropTypes from 'prop-types'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Card = ({ note, onDelete, onMove }) => {
   return (
     <div className='note-item'>
       <div className='note-item__content'>
-        <h3 className='note-item__title'>{note.title}</h3>
+        <Link to={`/notes/${note.id}`}>
+          <h3 className='note-item__title'>{note.title}</h3>
+        </Link>
         <p className='note-item__date'>
           {Intl.DateTimeFormat('id', { dateStyle: 'full' }).format(new Date(note.createdAt))}
         </p>
@@ -20,6 +24,12 @@ const Card = ({ note, onDelete, onMove }) => {
       </div>
     </div>
   )
+}
+
+Card.propType = {
+  note: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onMove: PropTypes.func.isRequired
 }
 
 export default Card

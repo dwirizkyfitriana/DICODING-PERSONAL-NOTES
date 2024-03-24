@@ -4,23 +4,47 @@
   box-sizing: border-box;
 }
 
+*[role='button'] {
+  cursor: pointer;
+}
+
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #dfdfdf;
+  color: #313131;
+}
+
+body.dark {
   background-color: #202124;
   color: white;
 }
 
-input, textarea {
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
+input,
+textarea {
   padding: 12px;
   margin: 12px 0;
   font-family: 'Inter', sans-serif;
   background-color: transparent;
-  color: white;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
 
-input::placeholder, textarea::placeholder {
+.dark input,
+textarea {
+  color: white;
+}
+
+input::placeholder,
+textarea::placeholder {
   color: #aaa;
   font-weight: bold;
 }
@@ -28,7 +52,7 @@ input::placeholder, textarea::placeholder {
 .note-app__header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 4px 16px;
   border-bottom: 1px solid #aaa;
 }
@@ -36,9 +60,7 @@ input::placeholder, textarea::placeholder {
 .note-app__header h1 {
   margin: 8px 0;
   flex: 1;
-  color: white;
 }
-
 
 .note-app__body {
   max-width: 1000px;
@@ -57,7 +79,8 @@ input::placeholder, textarea::placeholder {
   margin-bottom: 48px;
 }
 
-.note-input input, .note-input textarea {
+.note-input input,
+.note-input textarea {
   display: block;
   width: 100%;
 }
@@ -74,6 +97,11 @@ input::placeholder, textarea::placeholder {
 
 .note-input__body {
   min-height: 175px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  margin: 12px 0;
+  padding: 12px;
+  font-size: 14px;
 }
 
 .note-input button {
@@ -82,11 +110,14 @@ input::placeholder, textarea::placeholder {
   padding: 8px;
   background-color: transparent;
   font-family: 'Inter', sans-serif;
-  color: white;
   border: 1px solid #aaa;
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.dark .note-input button {
+  color: white;
 }
 
 .notes-list {
@@ -120,6 +151,17 @@ input::placeholder, textarea::placeholder {
   overflow: hidden;
   white-space: nowrap;
   margin-bottom: 4px;
+  width: fit-content;
+}
+
+.note-item__title:hover {
+  border-bottom: 1px solid #202124;
+  cursor: pointer;
+}
+
+.dark .note-item__title:hover {
+  border-bottom: 1px solid white;
+  cursor: pointer;
 }
 
 .note-item__date {
@@ -136,7 +178,8 @@ input::placeholder, textarea::placeholder {
   display: flex;
 }
 
-.note-item__delete-button,.note-item__archive-button {
+.note-item__delete-button,
+.note-item__archive-button {
   display: block;
   width: 100%;
   background-color: transparent;
@@ -153,8 +196,12 @@ input::placeholder, textarea::placeholder {
   color: #ff5f52;
 }
 
-.note-item__archive-button {
+.dark .note-item__archive-button {
   color: #fff263;
+}
+
+.note-item__archive-button {
+  color: #d2a611;
 }
 
 .note-item__archive-button:hover {
@@ -163,6 +210,124 @@ input::placeholder, textarea::placeholder {
 
 .note-item__delete-button:hover {
   color: #b00020;
+}
+
+.note-search input {
+  width: 100%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.add-btn {
+  border-radius: 10px;
+  background-color: #d2a611;
+  color: black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dark .add-btn {
+  background-color: #fff263;
+}
+
+.detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.detail-title {
+  font-weight: bold;
+  font-size: 56px;
+}
+
+.detail-body {
+  font-size: 18px;
+}
+
+.detail-body > pre {
+  overflow-x: hidden;
+  white-space: initial;
+}
+
+.detail-actions {
+  bottom: 32px;
+  display: flex;
+  gap: 16px;
+  position: fixed;
+  right: 32px;
+}
+
+.detail-actions > div {
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #202124;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.not-found > h1 {
+  font-size: 40px;
+}
+
+.detail-date {
+  color: #d2a611;
+}
+
+.dark .detail-date {
+  color: #fff263;
+}
+
+.dark .auth-link {
+  border-bottom: 1px solid white;
+}
+
+.auth-link {
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.public-header {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 1px solid black;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .public-header {
+  border: 1px solid white;
+}
+
+[contenteditable='true']:empty:before {
+  content: attr(data-placeholder);
+  pointer-events: none;
+  display: block;
+  color: #aaa;
 }
 
 @media only screen and (min-width: 500px) {

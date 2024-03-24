@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import Card from './Card'
 
@@ -7,7 +8,7 @@ const List = ({ title, list, onDelete, onMove }) => {
       <h2>{title}</h2>
       {list.length > 0 ? (
         <div className='notes-list'>
-          {list.map(item => (
+          {list.map((item) => (
             <Card key={item.id} note={item} onDelete={onDelete} onMove={onMove} />
           ))}
         </div>
@@ -16,6 +17,13 @@ const List = ({ title, list, onDelete, onMove }) => {
       )}
     </>
   )
+}
+
+List.propType = {
+  title: PropTypes.string.isRequired,
+  list: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onMove: PropTypes.func.isRequired
 }
 
 export default List
